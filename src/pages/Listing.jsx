@@ -44,7 +44,12 @@ function Listing() {
       <Helmet>
         <title>{listing.name}</title>
       </Helmet>
-      <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+      <Swiper 
+      slidesPerView={1}
+       pagination={{ clickable: true }}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        speed={1500}
+       >
         {listing.imgUrls.map((url, index) => (
           <SwiperSlide key={index}>
             <div
@@ -146,4 +151,3 @@ function Listing() {
 
 export default Listing
 
-// https://stackoverflow.com/questions/67552020/how-to-fix-error-failed-to-compile-node-modules-react-leaflet-core-esm-pat

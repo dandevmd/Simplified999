@@ -45,7 +45,6 @@ function EditListing() {
     regularPrice,
     discountedPrice,
     images,
-  
   } = formData
 
   const auth = getAuth()
@@ -53,7 +52,7 @@ function EditListing() {
   const params = useParams()
   const isMounted = useRef(true)
 
-  // Redirect if listing is not user's
+  
   useEffect(() => {
     if (listing && listing.userRef !== auth.currentUser.uid) {
       toast.error('Nu poți edita postare')
@@ -61,7 +60,7 @@ function EditListing() {
     }
   })
 
-  // Fetch listing to edit
+  
   useEffect(() => {
     setLoading(true)
     const fetchListing = async () => {
@@ -80,7 +79,7 @@ function EditListing() {
     fetchListing()
   }, [params.listingId, navigate])
 
-  // Sets userRef to logged in user
+ 
   useEffect(() => {
     if (isMounted) {
       onAuthStateChanged(auth, (user) => {
@@ -114,36 +113,7 @@ function EditListing() {
       toast.error('Max 6 images')
       return
     }
-
-    // let geolocation = {}
-    // let location
-
-    // if (geolocationEnabled) {
-    //   const response = await fetch(
-    //     `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
-    //   )
-
-    //   const data = await response.json()
-
-    //   geolocation.lat = data.results[0]?.geometry.location.lat ?? 0
-    //   geolocation.lng = data.results[0]?.geometry.location.lng ?? 0
-
-    //   location =
-    //     data.status === 'ZERO_RESULTS'
-    //       ? undefined
-    //       : data.results[0]?.formatted_address
-
-    //   if (location === undefined || location.includes('undefined')) {
-    //     setLoading(false)
-    //     toast.error('Please enter a correct address')
-    //     return
-    //   }
-    // } else {
-    //   geolocation.lat = latitude
-    //   geolocation.lng = longitude
-    // }
-
-    // Store image in firebase
+   
     const storeImage = async (image) => {
       return new Promise((resolve, reject) => {
         const storage = getStorage()
@@ -199,7 +169,7 @@ function EditListing() {
     delete formDataCopy.images
     !formDataCopy.offer && delete formDataCopy.discountedPrice
 
-    // Update listing
+    
     const docRef = doc(db, 'listings', params.listingId)
     await updateDoc(docRef, formDataCopy)
     setLoading(false)
@@ -217,7 +187,7 @@ function EditListing() {
       boolean = false
     }
 
-    // Files
+    
     if (e.target.files) {
       setFormData((prevState) => ({
         ...prevState,
@@ -225,7 +195,6 @@ function EditListing() {
       }))
     }
 
-    // Text/Booleans/Numbers
     if (!e.target.files) {
       setFormData((prevState) => ({
         ...prevState,
@@ -370,33 +339,6 @@ function EditListing() {
             onChange={onMutate}
             required
           />
-
-          {/* {!geolocationEnabled && (
-            <div className='formLatLng flex'>
-              <div>
-                <label className='formLabel'>Latitude</label>
-                <input
-                  className='formInputSmall'
-                  type='number'
-                  id='latitude'
-                  value={latitude}
-                  onChange={onMutate}
-                  required
-                />
-              </div>
-              <div>
-                <label className='formLabel'>Longitude</label>
-                <input
-                  className='formInputSmall'
-                  type='number'
-                  id='longitude'
-                  value={longitude}
-                  onChange={onMutate}
-                  required
-                />
-              </div>
-            </div>
-          )} */}
 
           <label className='formLabel'>Preț Fierbinte</label>
           <div className='formButtons'>

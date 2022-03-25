@@ -39,7 +39,7 @@ function SignIn() {
         navigate('/')
       }
     } catch (error) {
-      toast.error('Ați introdus date incorecte')
+      toast.error('Ai introdus date incorecte')
     }
   }
 

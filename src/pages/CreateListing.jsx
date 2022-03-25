@@ -15,7 +15,6 @@ import Spinner from '../components/Spinner'
 
 function CreateListing() {
   // eslint-disable-next-line
-  // const [geolocationEnabled, setGeolocationEnabled] = useState(true)
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     type: 'rent',
@@ -29,8 +28,6 @@ function CreateListing() {
     regularPrice: 0,
     discountedPrice: 0,
     images: {},
-    // latitude: 0,
-    // longitude: 0,
   })
 
   const {
@@ -45,8 +42,6 @@ function CreateListing() {
     regularPrice,
     discountedPrice,
     images,
-    // latitude,
-    // longitude,
   } = formData
 
   const auth = getAuth()
@@ -87,35 +82,7 @@ function CreateListing() {
       return
     }
 
-    // let geolocation = {}
-    // let location
-
-    // if (geolocationEnabled) {
-    //   const response = await fetch(
-    //     `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
-    //   )
-
-      // const data = await response.json()
-
-      // geolocation.lat = data.results[0]?.geometry.location.lat ?? 0
-      // geolocation.lng = data.results[0]?.geometry.location.lng ?? 0
-
-      // location =
-      //   data.status === 'ZERO_RESULTS'
-      //     ? undefined
-      //     : data.results[0]?.formatted_address
-
-    //   if (location === undefined || location.includes('undefined')) {
-    //     setLoading(false)
-    //     toast.error('Please enter a correct address')
-    //     return
-    //   }
-    // } else {
-    //   geolocation.lat = latitude
-    //   geolocation.lng = longitude
-    // }
-
-    // Store image in firebase
+    
     const storeImage = async (image) => {
       return new Promise((resolve, reject) => {
         const storage = getStorage()
@@ -188,7 +155,6 @@ function CreateListing() {
       boolean = false
     }
 
-    // Files
     if (e.target.files) {
       setFormData((prevState) => ({
         ...prevState,
@@ -196,7 +162,7 @@ function CreateListing() {
       }))
     }
 
-    // Text/Booleans/Numbers
+    
     if (!e.target.files) {
       setFormData((prevState) => ({
         ...prevState,
@@ -332,7 +298,7 @@ function CreateListing() {
             </button>
           </div>
 
-          <label className='formLabel'>Address</label>
+          <label className='formLabel'>Adresă</label>
           <textarea
             className='formInputAddress'
             type='text'
@@ -341,33 +307,6 @@ function CreateListing() {
             onChange={onMutate}
             required
           />
-
-          {/* {!geolocationEnabled && (
-            <div className='formLatLng flex'>
-              <div>
-                <label className='formLabel'>Latitude</label>
-                <input
-                  className='formInputSmall'
-                  type='number'
-                  id='latitude'
-                  value={latitude}
-                  onChange={onMutate}
-                  required
-                />
-              </div>
-              <div>
-                <label className='formLabel'>Longitude</label>
-                <input
-                  className='formInputSmall'
-                  type='number'
-                  id='longitude'
-                  value={longitude}
-                  onChange={onMutate}
-                  required
-                />
-              </div>
-            </div>
-          )} */}
 
           <label className='formLabel'>Preț Fiebinte</label>
           <div className='formButtons'>

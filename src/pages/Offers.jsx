@@ -21,10 +21,8 @@ function Offers() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        // Get reference
         const listingsRef = collection(db, 'listings')
 
-        // Create a query
         const q = query(
           listingsRef,
           where('offer', '==', true),
@@ -32,7 +30,6 @@ function Offers() {
           limit(5)
         )
 
-        // Execute query
         const querySnap = await getDocs(q)
 
         const lastVisible = querySnap.docs[querySnap.docs.length - 1]
@@ -50,20 +47,17 @@ function Offers() {
         setListings(listings)
         setLoading(false)
       } catch (error) {
-        toast.error('Ofertele nu au putu fi încarcate')
+        toast.error('Ofertele nu au putut fi încarcate')
       }
     }
 
     fetchListings()
   }, [])
 
-  // Pagination / Load More
   const onFetchMoreListings = async () => {
     try {
-      // Get reference
       const listingsRef = collection(db, 'listings')
 
-      // Create a query
       const q = query(
         listingsRef,
         where('offer', '==', true),
@@ -72,7 +66,6 @@ function Offers() {
         limit(10)
       )
 
-      // Execute query
       const querySnap = await getDocs(q)
 
       const lastVisible = querySnap.docs[querySnap.docs.length - 1]
@@ -120,7 +113,7 @@ function Offers() {
           <br />
           {lastFetchedListing && (
             <p className='loadMore' onClick={onFetchMoreListings}>
-              Arată mai mult
+               Mai mult
             </p>
           )}
         </>

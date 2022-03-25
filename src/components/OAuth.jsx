@@ -16,11 +16,11 @@ function OAuth() {
       const result = await signInWithPopup(auth, provider)
       const user = result.user
 
-      // Check for user
+      
       const docRef = doc(db, 'users', user.uid)
       const docSnap = await getDoc(docRef)
 
-      // If user, doesn't exist, create user
+      
       if (!docSnap.exists()) {
         await setDoc(doc(db, 'users', user.uid), {
           name: user.displayName,
@@ -30,13 +30,13 @@ function OAuth() {
       }
       navigate('/')
     } catch (error) {
-      toast.error('Could not authorize with Google')
+      toast.error('Autorizarea prin Google a eșuat')
     }
   }
 
   return (
     <div className='socialLogin'>
-      <p>Hai, {location.pathname === '/sign-up' ? 'Înregistreazăte' : 'Logheazăte'} with </p>
+      <p>Hai, {location.pathname === '/sign-up' ? 'Înregistreazăte' : 'Logheazăte'} cu </p>
       <button className='socialIconDiv' onClick={onGoogleClick}>
         <img className='socialIconImg' src={googleIcon} alt='google' />
       </button>

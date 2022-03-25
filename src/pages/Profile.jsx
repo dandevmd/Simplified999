@@ -67,12 +67,10 @@ function Profile() {
   const onSubmit = async () => {
     try {
       if (auth.currentUser.displayName !== name) {
-        // Update display name in fb
         await updateProfile(auth.currentUser, {
           displayName: name,
         })
 
-        // Update in firestore
         const userRef = doc(db, 'users', auth.currentUser.uid)
         await updateDoc(userRef, {
           name,
@@ -98,7 +96,7 @@ function Profile() {
         (listing) => listing.id !== listingId
       )
       setListings(updatedListings)
-      toast.success('Postarea a fot ștearsă')
+      toast.success('Postarea a fost ștearsă')
     }
   }
 
